@@ -1,0 +1,10 @@
+<h1>Braintree Payment Response</h1>
+
+<ul>
+  <li><%= link_to "Index", payments_path %></li>
+  <li><%= link_to "New Payment", new_payment_path %></li>
+</ul>
+
+<% @params.each do |k,v| -%>
+  <p><b><%= k %>: </b><%= v %></p>
+<% end -%>
