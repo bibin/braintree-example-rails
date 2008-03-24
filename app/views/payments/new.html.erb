@@ -3,7 +3,7 @@
 <% form_tag 'https://secure.braintreepaymentgateway.com/api/transact.php' do -%>
 
   <h2>Transparent Redirect</h2>
-  <p><em>This form only completes "sale" transactions.</em></p>
+  <p><em>This form only completes "sale" transactions and inserts records into a customer vault.</em></p>
   <p>The string to hash is: <br/>
     <pre><code><%= @to_hash %></code></pre></p>
 
@@ -14,6 +14,14 @@
     <%= text_field_tag "ccnumber", "4111111111111111" %></p>
   <p><label for="ccexp">Credit Card Expiration</label><br/>
     <%= text_field_tag "ccexp", "1010" %></p>
+  <p><label for="firstname">First Name</label><br/>
+    <%= text_field_tag "firstname", "Bob" %></p>
+  <p><label for="lastname">Last Name</label><br/>
+    <%= text_field_tag "lastname", "Dobbs" %></p>
+  <p><label for="email">Email</label><br/>
+    <%= text_field_tag "email", "bob@subgenius.com" %></p>
+
+  
 
   <p><label for="redirect">Redirect URL</label><br/>
     <%= text_field_tag "redirect", gateway_response_payments_url, :size => 45 %></p>
@@ -25,6 +33,8 @@
     <%= text_field_tag "time", @time, :size => 45 %></p>
   <p><label for="key_id">Key ID</label><br/>
     <%= text_field_tag "key_id", @key_id, :size => 45 %></p>
+  <p><label for="customer_vault">Customer Vault</label><br/>
+    <%= text_field_tag "customer_vault", "add_customer" %></p>
   <p><label for="hash">Hash</label><br/>
     <%= text_field_tag "hash", @hash, :size => 45 %></p>
   <%= submit_tag "Submit" %>
