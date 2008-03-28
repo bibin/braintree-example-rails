@@ -24,6 +24,9 @@ class CartsController < ApplicationController
   end
 
   def remove
+    @cart.cart_items.find(params[:cart_item]).destroy
+    flash[:notice] = "The item has been removed from your cart."
+    redirect_to cart_path
   end
 
   def clear

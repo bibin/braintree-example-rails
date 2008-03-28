@@ -11,4 +11,9 @@ class Cart < ActiveRecord::Base
     return total_cost
   end
 
+  # maybe
+#  def clear
+#    self.cart_items.clear
+#  end
+
 end

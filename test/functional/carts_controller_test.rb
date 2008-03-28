@@ -115,6 +115,25 @@ class CartsControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
 
+  def test_should_remove_cart_item
+    login_as :quentin
+    assert_difference 'CartItem.count', -1 do 
+      delete :remove, :cart_item => cart_items(:first).id
+    end
+  end
+
+  def test_should_have_flash
+    login_as :quentin
+    delete :remove, :cart_item => cart_items(:first).id
+    assert flash.has_key?(:notice)
+  end
+
+  def test_should_redirect_to_cart_after_remove
+    login_as :quentin
+    delete :remove, :cart_item => cart_items(:first).id
+    assert_redirected_to cart_path
+  end
+
   # CLEAR
   def test_should_require_login
     delete :clear

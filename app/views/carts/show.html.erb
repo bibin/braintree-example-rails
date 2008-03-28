@@ -19,7 +19,12 @@
       <td><%= cart_item.quantity %></td>
       <td class="right"><%= number_to_currency cart_item.price %></td>
       <td class="right"><%= number_to_currency cart_item.total_cost %></td>
-      <td><%= button_to "Del", remove_cart_path, :method => :delete %></td>
+      <td>
+        <% form_tag remove_cart_path, :method => :delete do -%>
+          <%= hidden_field_tag "cart_item", cart_item.id %>
+          <%= submit_tag "Del" %>
+        <% end -%>
+      </td>
     </tr>
   <% end -%>
   <tr>
