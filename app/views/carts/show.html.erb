@@ -1,0 +1,33 @@
+<h1>Your Cart (<%= @cart.cart_items.count %>)</h1>
+
+<p>Your cart is saved between sessions so you can always come back and checkout later.</p>
+
+<% unless @cart.cart_items.empty? -%>
+<p><%= link_to "Clear Cart", clear_cart_path, :method => :delete %></p>
+
+<table class="cart_table">
+  <tr class="header">
+    <th scope="col" class="left">Product</th>
+    <th scope="col">Quantity</th>
+    <th scope="col" class="right">Price</th>
+    <th scope="col" class="right">Total Cost</th>
+    <th scope="col">&nbsp;</th>
+  </tr>
+  <% @cart.cart_items.each do |cart_item| -%>
+    <tr>
+      <td class="left"><%= link_to h(cart_item.product.name), product_path(cart_item.product) %></td>
+      <td><%= cart_item.quantity %></td>
+      <td class="right"><%= number_to_currency cart_item.price %></td>
+      <td class="right"><%= number_to_currency cart_item.total_cost %></td>
+      <td><%= button_to "Del", remove_cart_path, :method => :delete %></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <td class="right total" colspan="3">Total</td>
+    <td class="right"><%= number_to_currency @cart.total_cost %></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<% else -%>
+  <h3>There are no items in your cart.  Add some.</h3>
+<% end -%>

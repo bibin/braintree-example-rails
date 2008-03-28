@@ -1,0 +1,21 @@
+<p>
+  <label for="product_name">Name</label><br/>
+  <%= f.text_field :name, :size => 30 %></p>
+
+<% unless @product.new_record? -%>
+  <p>
+    <label for="product_permalink">Permalink</label><br/>
+    <%= f.text_field :permalink %></p>
+<% end -%>
+
+<p>
+  <label for="product_description">Description</label><span class="help">This field is filtered.</span><br/>
+  <%= f.text_area :description, :size => "50x10" %></p>
+
+<p>
+  <label for="product_price">Price</label><span class="help">Enter in 00.00 format.</span><br/>
+  <%= f.text_field :price, :size => 10, :class => "currency" %></p>
+
+<p>
+  <label for="product_filter">Filter</label><br/>
+  <%= f.select :filter, options_for_filters %></p>

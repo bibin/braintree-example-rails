@@ -1,0 +1,7 @@
+<h1>New Product</h1>
+
+<%= error_messages_for :product %>
+<% form_for :product, @product, :url => products_path do |f| -%>
+  <%= render :partial => "fields", :locals => { :f => f } %>
+  <%= submit_tag "Create" %>
+<% end -%>

@@ -3,6 +3,7 @@
 <ul>
   <li><%= link_to "Index", payments_path %></li>
   <li><%= link_to "New Payment", new_payment_path %></li>
+  <li><%= link_to "Edit Customer", edit_payment_path(1) %></li>
 </ul>
 
 <% @params.each do |k,v| -%>

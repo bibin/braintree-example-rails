@@ -1,1 +1,104 @@
 /* Application Stylesheet */
+
+* { margin: 0; padding: 0; }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0 3em; padding: 0;
+    font-size: small;
+    font-family: helvetica, arial, sans-serif;
+    line-height: 1.5;
+    min-width: 780px;
+    background: #D8DFE7;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #2A9D1A;
+}
+
+a, a:visited {
+    color: #68A9E3;
+    text-decoration: none;
+    border-bottom: 1px dotted #68A9E3;
+}
+
+a:hover {
+    color: #DEEEFB;
+    background: #68A9E3;
+    text-decoration: none;
+}
+
+.center { text-align: center; }
+
+#wrapper {
+    margin: 0 auto;
+    padding: 1em;
+}
+
+#header h1 {
+    font-size: 4em;
+}
+
+#header h1 a { color: #68A9E3; border: none;}
+#header h1 a:hover { background: #D8DFE7; color: #68A9E3; text-decoration: underline}
+
+#mini-nav { 
+    text-align: right; margin-top: -2em; color: #2A9D1A; 
+    font-size: medium;
+}
+
+#container {
+    background: #DEEEFB;
+    padding: 1em;
+}
+
+#content {
+    padding: 1em;
+}
+
+#footer { clear: both; padding: 1em; color: #68A9E3; }
+
+/* FORMS */
+
+label {
+    font-weight: bold;
+    font-size: medium;
+}
+
+span.help {
+    font-style: italic;
+    padding-left: 1em;
+    color: #2A9D1A;
+}
+
+form p {
+    margin: 1em 0;
+}
+
+input { font-size: x-large; }
+
+input.currency { text-align: right; }
+
+textarea { font-size: large; }
+
+/* TABLES */
+
+.products_table {
+    margin: 0 auto;
+}
+
+.cart_table {
+    text-align: center;
+    margin: 0 auto;
+    width: 75%;
+    font-size: x-large;
+}
+
+.cart_table td.total { font-weight: bold }
+
+td.left, th.left { text-align: left; }
+
+td.right, th.right { text-align: right; }

@@ -1,0 +1,27 @@
+<% if admin_authorized? -%>
+<ul class="action_links">
+  <li><%= link_to "New", new_product_path %></li>
+</ul>
+<% end -%>
+
+<h1>Products</h1>
+
+<table class="products_table">
+  <% @products.in_groups_of(5, false) do |group| -%>
+  <tr>
+    <% group.each do |product| -%>
+      <td style="padding: 1em;">
+        <h2 class="center"><%= link_to h(product.name), product_path(product) %></h2>
+        <%= image_tag "polaroid.png" %>
+        <div class="center"><%= number_to_currency(product.price) %></div>
+        <% if admin_authorized? -%>
+          <div><%= link_to "edit", edit_product_path(product) %> | 
+            <%= link_to "del", product_path(product), :confirm => "Are you sure?", :method => :delete %>
+          </div>
+        <% end -%>
+      </td>
+    <% end -%>
+  </tr>
+  <% end -%>
+</table>
+

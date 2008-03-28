@@ -1,20 +1,38 @@
 require 'digest/md5'
 class PaymentsController < ApplicationController
 
+#  before_filter :set_hash_variables, :except => [ :index, :gateway_response ]
+
   def index
-    
+    # render index.html.erb
   end
 
   def new
-    @now = Time.now
+    @amount = 50.00
+    @orderid = "123456"
+
+       @now = Time.now
     
     @time = @now.getutc.strftime("%Y%m%d%H%M%S")
-    @amount = 5000.0
-    @orderid = "123456"
+
     key = "Zydpf74pK59Gc85vpu6r9My286BUYw3q"
     @key_id = "557218"
-#    @key_id = "582444"
-#    key = "pwngFha662YxZuZ6eh5jr2kem3ZkM6n8"
+
+    @to_hash = [@orderid, @amount, @time, key].join("|")
+    @hash = Digest::MD5.hexdigest(@to_hash)
+  end
+
+  def edit
+    @customerid = "236846573"
+    @amount = 1.00
+    @orderid = 1
+
+       @now = Time.now
+    
+    @time = @now.getutc.strftime("%Y%m%d%H%M%S")
+
+    key = "Zydpf74pK59Gc85vpu6r9My286BUYw3q"
+    @key_id = "557218"
 
     @to_hash = [@orderid, @amount, @time, key].join("|")
     @hash = Digest::MD5.hexdigest(@to_hash)
@@ -23,5 +41,18 @@ class PaymentsController < ApplicationController
   def gateway_response
     @params = params
     render :template => "payments/response"
+  end
+
+  private
+  def set_hash_variables
+    @now = Time.now
+    
+    @time = @now.getutc.strftime("%Y%m%d%H%M%S")
+
+    key = "Zydpf74pK59Gc85vpu6r9My286BUYw3q"
+    @key_id = "557218"
+
+    @to_hash = [@orderid, @amount, @time, key].join("|")
+    @hash = Digest::MD5.hexdigest(@to_hash)
   end
 end

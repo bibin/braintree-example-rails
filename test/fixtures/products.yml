@@ -1,13 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  description: MyText
-  description_html: MyText
+first:
+  name: "Willy's Widgets"
+  description: "This is _kewl_."
+  description_html: "<p>This is <em>kewl</em></p>"
   price: 1.5
-
-two:
-  name: MyString
-  description: MyText
-  description_html: MyText
-  price: 1.5
+  permalink: willy-s-widgets
+  filter: textile_filter

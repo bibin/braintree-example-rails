@@ -4,10 +4,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Payment</title>
+    <title>Braintree Store - <%= controller.controller_name %> - <%= controller.action_name %></title>
     <%= stylesheet_link_tag "application" %>
   </head>
   <body>
-    <%= @content_for_layout %>
+    <div id="wrapper">
+      <div id="header">
+        <h1><%= link_to "Braintree Store", "/" %></h1>
+        <div id="mini-nav">
+          <% unless logged_in? -%>
+            <%= link_to "signup", signup_path %> |
+            <%= link_to "login", login_path %>
+          <% else -%>
+            Welcome, <%= current_user.login %> |
+            <%= link_to "Your Cart (#{cart_item_count})", cart_path %> |
+            <%= link_to "logout", logout_path %>
+          <% end -%>
+        </div>
+      </div><!-- end of header -->
+      <div id="container">
+        <div id="content">
+          <%= flash_div :notice, :error %>
+          <%= @content_for_layout %>
+        </div><!-- end of content -->
+      </div><!-- end of container -->
+      <div id="footer">
+        Braintree Payment Solutions
+      </div>
+    </div>
   </body>
 </html>

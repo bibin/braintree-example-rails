@@ -1,0 +1,9 @@
+<p><%= link_to "Products", products_path %></p>
+<h1><%= h @product.name %></h1>
+<p><strong>Price: </strong><%= number_to_currency(@product.price) %></p>
+<%= @product.description_html %>
+<% form_for :cart_item, CartItem.new, :url => add_cart_path do |f| -%>
+  <%= hidden_field_tag :product_id, @product.id %>
+  <%= f.select :quantity, options_for_cart_item_quantity %>
+  <%= submit_tag "Add to Cart" %>
+<% end -%>

@@ -1,0 +1,9 @@
+<h1>Edit <%= h @product.name %></h1>
+
+<%= error_messages_for :product %>
+<% form_for :product, @product, :url => product_path(@product),
+            :html => { :method => :put } do |f| -%>
+  <%= render :partial => "fields", :locals => { :f => f } %>
+  <%= submit_tag "Create" %>
+<% end -%>
+

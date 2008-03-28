@@ -1,0 +1,39 @@
+<h1>Update a Customer</h1>
+
+<% form_tag 'https://secure.braintreepaymentgateway.com/api/transact.php' do -%>
+
+  <h2>Transparent Redirect</h2>
+  <p><em>This form updates a record in the customer vault.</em></p>
+  <p>The string to hash is: <br/>
+    <pre><code><%= @to_hash %></code></pre></p>
+
+  <p>The generated MD5 hash is: <br/>
+    <pre><code><%= @hash %></code></pre></p>
+
+  <p><label for="ccnumber">Credit Card Number</label><br/>
+    <%= text_field_tag "ccnumber", "4111111111111111" %></p>
+  <p><label for="ccexp">Credit Card Expiration</label><br/>
+    <%= text_field_tag "ccexp", "1010" %></p>
+  <p><label for="firstname">First Name</label><br/>
+    <%= text_field_tag "firstname", "JR" %></p>
+  <p><label for="lastname">Last Name</label><br/>
+    <%= text_field_tag "lastname", "Dobbs" %></p>
+
+  <p><label for="redirect">Redirect URL</label><br/>
+    <%= text_field_tag "redirect", gateway_response_payments_url, :size => 45 %></p>
+  <p><label for="customer_vault_id">Customer Vault ID</label><br/>
+    <%= text_field_tag "customer_vault_id", @customerid, :size => 45 %></p>
+  <p><label for="time">Time</label><br/>
+    <%= text_field_tag "time", @time, :size => 45 %></p>
+  <p><label for="orderid">Order ID</label><br/>
+    <%= text_field_tag "orderid", @orderid, :size => 45 %></p>
+  <p><label for="amount">Amount</label><br/>
+    <%= text_field_tag "amount", @amount, :size => 45 %></p>
+  <p><label for="key_id">Key ID</label><br/>
+    <%= text_field_tag "key_id", @key_id, :size => 45 %></p>
+  <p><label for="customer_vault">Customer Vault</label><br/>
+    <%= text_field_tag "customer_vault", "add_customer" %></p>
+  <p><label for="hash">Hash</label><br/>
+    <%= text_field_tag "hash", @hash, :size => 45 %></p>
+  <%= submit_tag "Submit" %>
+<% end -%>
