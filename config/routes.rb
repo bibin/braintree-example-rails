@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
 
   map.resource :cart, :member => { :add    => :post,
-                                   :change => :put,
+                                   :update => :put,
                                    :remove => :delete,
                                    :clear  => :delete,
                                  }

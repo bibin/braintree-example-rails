@@ -17,10 +17,14 @@ class CartsController < ApplicationController
     else
       flash[:error] = "Product could not be saved for some reason."
     end
-    redirect_to product_path(@product)
+    redirect_to cart_path
   end
 
   def update
+    @cart_item = @cart.cart_items.find(params[:item])
+    @cart_item.update_attributes(:quantity => params[:cart_item][:quantity])
+    flash[:notice] = "Item updated."
+    redirect_to cart_path
   end
 
   def remove

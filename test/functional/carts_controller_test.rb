@@ -97,16 +97,38 @@ class CartsControllerTest < ActionController::TestCase
     assert flash.has_key?(:error)
   end
 
-  def test_should_redirect_to_product_page
+  def test_should_redirect_to_show
     login_as :quentin
     post :add, cart_item_params
-    assert_redirected_to product_path(assigns(:product))
+    assert_redirected_to cart_path
   end
 
   # UPDATE  
   def test_should_require_login
-    delete :remove
+    put :update, :item => cart_items(:first).id,
+                 :cart_item => { :quantity => (cart_items(:first).quantity + 1) }
     assert_redirected_to login_path
+  end
+
+  def test_should_assign_cart_item_variable_on_update
+    login_as :quentin
+    put :update, :item => cart_items(:first).id,
+                 :cart_item => { :quantity => (cart_items(:first).quantity + 1) }
+    assert assigns(:cart_item)
+  end
+  
+  def test_should_assign_flash_on_update
+    login_as :quentin
+    put :update, :item => cart_items(:first).id,
+                 :cart_item => { :quantity => (cart_items(:first).quantity + 1) }
+    assert flash.has_key?(:notice)
+  end
+
+  def test_should_redirect_to_show_on_update
+    login_as :quentin
+    put :update, :item => cart_items(:first).id,
+                 :cart_item => { :quantity => (cart_items(:first).quantity + 1) }
+    assert_redirected_to cart_path
   end
 
   # REMOVE

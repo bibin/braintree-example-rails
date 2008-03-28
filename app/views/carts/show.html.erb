@@ -19,7 +19,13 @@
       <td><%= cart_item.quantity %></td>
       <td class="right"><%= number_to_currency cart_item.price %></td>
       <td class="right"><%= number_to_currency cart_item.total_cost %></td>
-      <td>
+      <td class="right">
+        <% form_for :cart_item, cart_item, :url => update_cart_path,
+                     :html => {:method => :put} do |f| %>
+          <%= hidden_field_tag "item", cart_item.id  %>
+          <%= f.select :quantity, options_for_cart_item_quantity %>
+          <%= submit_tag "Update" %>
+        <% end -%>
         <% form_tag remove_cart_path, :method => :delete do -%>
           <%= hidden_field_tag "cart_item", cart_item.id %>
           <%= submit_tag "Del" %>
