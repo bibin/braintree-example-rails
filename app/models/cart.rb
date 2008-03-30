@@ -11,6 +11,10 @@ class Cart < ActiveRecord::Base
     return total_cost
   end
 
+  def create_order
+    Order.create #:order_items => cart_items.map(&:to_order_item)
+  end
+
   # maybe
 #  def clear
 #    self.cart_items.clear

@@ -19,4 +19,11 @@ class CartTest < ActiveSupport::TestCase
     cart.cart_items.create(:product_id => products(:first).id, :quantity => 10, :price => 10.00 )
     assert_equal 101.5, cart.total_cost
   end
+
+  def test_should_create_order
+    cart = carts(:first)
+    assert_difference 'Order.count' do 
+      cart.create_order
+    end
+  end
 end
