@@ -40,6 +40,12 @@ class CartItemTest < ActiveSupport::TestCase
     assert order_item.is_a?(OrderItem)
   end
 
+  def test_should_have_valid_order_item_except_order_foreign_key
+    cart_item = cart_items(:first)
+    order_item = cart_item.to_order_item
+    assert order_item.valid?
+  end
+
   def test_should_copy_values_to_order_item
     cart_item = cart_items(:first)
     order_item = cart_item.to_order_item

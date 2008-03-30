@@ -11,7 +11,9 @@ class CartItem < ActiveRecord::Base
   end
 
   def to_order_item
-    order_item_attributes = {:product_id => product_id, :quantity => quantity, :price => price }
+    order_item_attributes = { :product_id => product_id, 
+                              :quantity   => quantity, 
+                              :price      => price       }
     OrderItem.new(order_item_attributes)
   end
 end

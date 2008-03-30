@@ -4,7 +4,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
 
   # VALIDATIONS
-  validates_numericality_of :quantity, :product_id, :order_id
+  validates_numericality_of :quantity, :product_id
 
   def total_cost
     self.price * self.quantity

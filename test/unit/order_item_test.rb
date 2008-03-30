@@ -21,11 +21,6 @@ class OrderItemTest < ActiveSupport::TestCase
     assert !order_item.valid?
   end
 
-  def test_should_require_a_numerica_order_id
-    order_item = new_order_item(:order_id => nil)
-    assert !order_item.valid?
-  end
-
   # INSTANCE_METHODS
   def test_should_calculate_total_cost
     quantity, price = 10, 10.00
