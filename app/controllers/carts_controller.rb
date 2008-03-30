@@ -11,6 +11,7 @@ class CartsController < ApplicationController
   def add
     @product = Product.find params[:product_id]
     @cart_item = @cart.cart_items.build params[:cart_item]
+    # TODO: make the price declaration a callback before_save_on_create
     @cart_item.product, @cart_item.price = @product, @product.price
     if @cart_item.save
       flash[:notice] = "#{@product.name} was added to your cart."

@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+first:
+  user_id: 1
+  order_id: MyString
+  amount: 1.5
+  response: MyString
+  response_text: MyString
+  authcode: MyString
+  transaction_id: MyString
+  gateway_hash: MyString
+  avs_response: MyString
+  cvv_response: 
+  response_code: MyString
+  gateway_response: MyString
+  customer_ip: MyString
+  status: MyString
+
+two:
+  user_id: 1
+  order_id: MyString
+  amount: 1.5
+  response: MyString
+  response_text: MyString
+  authcode: MyString
+  transaction_id: MyString
+  gateway_hash: MyString
+  avs_response: MyString
+  cvv_response: 
+  response_code: MyString
+  gateway_response: MyString
+  customer_ip: MyString
+  status: MyString

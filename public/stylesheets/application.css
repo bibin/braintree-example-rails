@@ -32,6 +32,8 @@ a:hover {
 }
 
 .center { text-align: center; }
+.left { text-align: left; }
+.right { text-align: right; }
 
 #wrapper {
     margin: 0 auto;
@@ -78,9 +80,13 @@ form p {
     margin: 1em 0;
 }
 
+form.inline { display: inline;  }
+
 input { font-size: x-large; }
 
 input.currency { text-align: right; }
+
+input.small { font-size: small; }
 
 textarea { font-size: large; }
 
@@ -97,8 +103,9 @@ textarea { font-size: large; }
     font-size: x-large;
 }
 
+.cart_table td { border-bottom: 1px solid #D8DFE7; }
+
 .cart_table td.total { font-weight: bold }
 
-td.left, th.left { text-align: left; }
 
-td.right, th.right { text-align: right; }
+

@@ -15,7 +15,7 @@ class CartTest < ActiveSupport::TestCase
     # FIXME: this is a bad test with hardcoded values
     cart = carts(:first)
     assert_equal 1.5, cart.total_cost
-    # FIXME: just realized that price from product is in controller
+    # FIXME: just realized that price from product is in controller, should pass product & cart to make cart item
     cart.cart_items.create(:product_id => products(:first).id, :quantity => 10, :price => 10.00 )
     assert_equal 101.5, cart.total_cost
   end

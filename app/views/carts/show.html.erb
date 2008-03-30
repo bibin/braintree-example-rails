@@ -5,7 +5,7 @@
 <% unless @cart.cart_items.empty? -%>
 <p><%= link_to "Clear Cart", clear_cart_path, :method => :delete %></p>
 
-<table class="cart_table">
+<table class="cart_table" cellspacing="0">
   <tr class="header">
     <th scope="col" class="left">Product</th>
     <th scope="col">Quantity</th>
@@ -21,14 +21,15 @@
       <td class="right"><%= number_to_currency cart_item.total_cost %></td>
       <td class="right">
         <% form_for :cart_item, cart_item, :url => update_cart_path,
-                     :html => {:method => :put} do |f| %>
+                     :html => { :method => :put,
+                                :class  => :inline} do |f| %>
           <%= hidden_field_tag "item", cart_item.id  %>
           <%= f.select :quantity, options_for_cart_item_quantity %>
-          <%= submit_tag "Update" %>
+          <%= submit_tag "Update", :class => "small" %>
         <% end -%>
-        <% form_tag remove_cart_path, :method => :delete do -%>
+        <% form_tag remove_cart_path, :method => :delete, :class => "inline"  do -%>
           <%= hidden_field_tag "cart_item", cart_item.id %>
-          <%= submit_tag "Del" %>
+          <%= submit_tag "Del", :class => "small" %>
         <% end -%>
       </td>
     </tr>
@@ -36,7 +37,7 @@
   <tr>
     <td class="right total" colspan="3">Total</td>
     <td class="right"><%= number_to_currency @cart.total_cost %></td>
-    <td>&nbsp;</td>
+    <td><%= button_to "Checkout", "/" %></td>
   </tr>
 </table>
 <% else -%>
