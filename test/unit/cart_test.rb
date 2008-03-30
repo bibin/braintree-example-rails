@@ -22,8 +22,14 @@ class CartTest < ActiveSupport::TestCase
 
   def test_should_create_order
     cart = carts(:first)
-    assert_difference 'Order.count' do 
-      cart.create_order
-    end
+    order = cart.create_order
+    assert !order.new_record?
+  end
+
+  def test_should_create_order_with_order_items
+    cart = carts(:first)
+    assert_not_nil cart.cart_items
+    order = cart.create_order
+    assert_not_nil order.order_items
   end
 end

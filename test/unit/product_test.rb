@@ -6,6 +6,10 @@ class ProductTest < ActiveSupport::TestCase
     assert Product.new.respond_to?(:cart_items)
   end
 
+  def test_should_have_many_order_items
+    assert Product.new.respond_to?(:order_items)
+  end
+
   # VALIDATIONS
   def test_should_require_title
     product = new_product(:name => nil)

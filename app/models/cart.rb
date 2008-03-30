@@ -12,7 +12,7 @@ class Cart < ActiveRecord::Base
   end
 
   def create_order
-    Order.create #:order_items => cart_items.map(&:to_order_item)
+    Order.create :order_items => cart_items.map(&:to_order_item)
   end
 
   # maybe

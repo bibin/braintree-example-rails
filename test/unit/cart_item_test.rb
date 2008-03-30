@@ -34,6 +34,21 @@ class CartItemTest < ActiveSupport::TestCase
     assert_equal expected, cart_item.total_cost
   end
 
+  def test_should_initialize_order_item
+    cart_item = cart_items(:first)
+    order_item = cart_item.to_order_item
+    assert order_item.is_a?(OrderItem)
+  end
+
+  def test_should_copy_values_to_order_item
+    cart_item = cart_items(:first)
+    order_item = cart_item.to_order_item
+    # TODO: maybe separate to multiple tests?
+    assert_equal cart_item.price, order_item.price
+    assert_equal cart_item.quantity, order_item.quantity
+    assert_equal cart_item.product, order_item.product
+  end
+
   private
   def new_cart_item(options = { })
     CartItem.new(

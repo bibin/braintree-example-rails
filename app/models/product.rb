@@ -11,7 +11,8 @@ class Product < ActiveRecord::Base
   filtered_column :description
 
   # ASSOCIATIONS
-  has_many :cart_items
+  has_many :cart_items, :dependent => :destroy
+  has_many :order_items, :dependent => :destroy
 
   def to_param
     "#{self.id}-#{self.permalink}"
