@@ -15,9 +15,12 @@ class Cart < ActiveRecord::Base
     Order.create :order_items => cart_items.map(&:to_order_item)
   end
 
-  # maybe
-#  def clear
-#    self.cart_items.clear
-#  end
+  def empty?
+    cart_items.empty?
+  end
+
+  def clear
+    self.cart_items.clear
+  end
 
 end

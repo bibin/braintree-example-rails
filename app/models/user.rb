@@ -2,6 +2,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   # ASSOCIATIONS
   has_one :cart, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

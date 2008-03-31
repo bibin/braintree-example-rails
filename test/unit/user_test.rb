@@ -98,6 +98,10 @@ class UserTest < Test::Unit::TestCase
     assert User.new.respond_to?(:cart)
   end
 
+  def test_should_have_many_orders
+    assert User.new.respond_to?(:orders)
+  end
+
 protected
   def create_user(options = {})
     record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))

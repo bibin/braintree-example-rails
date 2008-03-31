@@ -32,4 +32,10 @@ class CartTest < ActiveSupport::TestCase
     order = cart.create_order
     assert_not_nil order.order_items
   end
+
+  def test_should_decide_if_cart_is_empty
+    cart = carts(:first)
+    expected = cart.cart_items.empty?
+    assert_equal expected, cart.empty?
+  end
 end

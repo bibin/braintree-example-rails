@@ -1,0 +1,59 @@
+<h1>Checkout</h1>
+<p>Submit your credit card information securely.</p>
+
+<% form_tag 'https://secure.braintreepaymentgateway.com/api/transact.php' do -%>
+  <%= transparent_redirect_hidden_fields %>
+  <fieldset>
+    <legend>Contact Information</legend>
+    <p><label for="firstname">First Name</label><br/>
+      <%= text_field_tag "firstname" %></p>
+    <p><label for="lastname">Last Name</label><br/>
+      <%= text_field_tag "lastname" %></p>
+    <p><label for="email">Email</label><br/>
+      <%= text_field_tag "email" %></p>
+    <p><label for="address1">Address1</label><br/>
+      <%= text_field_tag "address1" %></p>
+    <p><label for="address2">Address2</label><br/>
+      <%= text_field_tag "address2" %></p>
+    <p><label for="city">City</label><br/>
+      <%= text_field_tag "city" %></p>
+    <p><label for="state">State</label><br/>
+      <%= select_tag "state", us_state_options_for_select(nil, :include_blank => true) %></p>
+    <p><label for="zip">Zip</label><br/>
+      <%= text_field_tag "zip" %></p>
+    <p><label for="country">Country</label><br/>
+      <%= select_tag "country", country_options_for_select("United States", "United States") %></p>
+  </fieldset>
+  <fieldset>
+    <legend>Shipping Address</legend>
+    <p><label for="shipping_firstname">First Name</label><br/>
+      <%= text_field_tag "shipping_firstname" %></p>
+    <p><label for="shipping_lastname">Last Name</label><br/>
+      <%= text_field_tag "shipping_lastname" %></p>
+    <p><label for="shipping_email">Email</label><br/>
+      <%= text_field_tag "shipping_email" %></p>
+    <p><label for="shipping_address1">Address1</label><br/>
+      <%= text_field_tag "shipping_address1" %></p>
+    <p><label for="shipping_address2">Address2</label><br/>
+      <%= text_field_tag "shipping_address2" %></p>
+    <p><label for="shipping_city">City</label><br/>
+      <%= text_field_tag "shipping_city" %></p>
+    <p><label for="shipping_state">State</label><br/>
+      <%= select_tag "shipping_state", us_state_options_for_select(nil, :include_blank => true) %></p>
+    <p><label for="shipping_zip">Zip</label><br/>
+      <%= text_field_tag "shipping_zip" %></p>
+    <p><label for="shipping_country">Country</label><br/>
+      <%= select_tag "shipping_country", country_options_for_select("United States", "United States") %></p>
+  </fieldset>
+  <fieldset>
+    <legend>Billing Information</legend>
+    <p><label for="ccnumber">Credit Card Number</label><br/>
+      <%= text_field_tag "ccnumber" %></p>
+    <p><label for="ccexp">Credit Card Expiration</label><em>MMYY format, ie. 1010 for October, 2010</em><br/>
+      <%= text_field_tag "ccexp" %></p>
+    <p><label for="cvv">Card Verification</label><em>This number cannot legally be stored.</em><br/>
+      <%= text_field_tag "cvv" %></p>
+
+  </fieldset>
+<%= submit_tag "Submit" %> <strong>Clicking this button will charge your credit card.</strong>
+<% end -%>

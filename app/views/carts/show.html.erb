@@ -37,7 +37,7 @@
   <tr>
     <td class="right total" colspan="3">Total</td>
     <td class="right"><%= number_to_currency @cart.total_cost %></td>
-    <td><%= button_to "Checkout", "/" %></td>
+    <td><%= button_to "Checkout", orders_path, :method => :post %></td>
   </tr>
 </table>
 <% else -%>
