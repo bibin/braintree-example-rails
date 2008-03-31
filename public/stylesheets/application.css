@@ -90,6 +90,25 @@ input.small { font-size: small; }
 
 textarea { font-size: large; }
 
+fieldset {
+    border: 1px solid #ccc;
+    padding: 0 1em;
+    margin: 1em;
+}
+
+legend {
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    font-size: large;
+    color: #2A9D1A;
+    color: #68A9E3;
+    background: #D8DFE7;
+    padding: .25em .5em;
+    border: 1px solid #ccc;
+    border-bottom-color: #999;
+    border-right-color: #999;
+}
+
 /* TABLES */
 
 .products_table {
