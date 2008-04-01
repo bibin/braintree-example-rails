@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 first:
-  order_id: 1
+  order: first
   product_id: 1
   quantity: 1
   price: 1.5
 
 second:
-  order_id: 1
+  order: first
   product_id: 2
   quantity: 1
   price: 1.5

@@ -3,11 +3,11 @@
 first:
   user_id: 1
   order_id: MyString
-  amount: 1.5
   response: MyString
   response_text: MyString
   authcode: MyString
-  transaction_id: MyString
+  amount:
+  transaction_id:
   gateway_hash: MyString
   avs_response: MyString
   cvv_response: 
@@ -19,11 +19,11 @@ first:
 two:
   user_id: 1
   order_id: MyString
-  amount: 1.5
   response: MyString
   response_text: MyString
   authcode: MyString
-  transaction_id: MyString
+  amount: 
+  transaction_id:
   gateway_hash: MyString
   avs_response: MyString
   cvv_response: 

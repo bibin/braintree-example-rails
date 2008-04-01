@@ -11,12 +11,13 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   # INSTANCE_METHODS
-  def test_should_calculate_at_total_cost
-    # FIXME: this is a bad test with hardcoded values
-#    order = orders(:first)
-#    assert_equal 1.5, order.total_cost
-    # FIXME: just realized that price from product is in controller, should pass product & order to make order item
-#    order.order_items.create(:product_id => products(:first).id, :quantity => 10, :price => 10.00 )
-#    assert_equal 101.5, order.total_cost
+  def test_should_calculate_amount_on_save
+    order = orders(:first)
+    expected = 0
+    order.order_items.each do |order_item|
+      expected += order_item.total_cost
+    end
+    order.save
+    assert_equal expected, order.amount
   end
 end
