@@ -73,24 +73,6 @@ class OrdersControllerTest < ActionController::TestCase
     assert assigns(:time)
   end
 
-  def test_should_set_key_for_transparent_redirect_on_checkout
-    login_as :quentin
-    get :checkout, :id => users(:quentin).orders.first.id
-    assert assigns(:key)
-  end
-
-  def test_should_set_key_id_for_transparent_redirect_on_checkout
-    login_as :quentin
-    get :checkout, :id => users(:quentin).orders.first.id
-    assert assigns(:key_id)
-  end
-
-  def test_should_set_string_to_hash_for_transparent_redirect_on_checkout
-    login_as :quentin
-    get :checkout, :id => users(:quentin).orders.first.id
-    assert assigns(:string_to_hash)
-  end
-
   def test_should_set_hash_for_transparent_redirect_on_checkout
     login_as :quentin
     get :checkout, :id => users(:quentin).orders.first.id
@@ -104,7 +86,7 @@ class OrdersControllerTest < ActionController::TestCase
                           [assigns(:order).id, 
                            assigns(:order).amount, 
                            assigns(:time), 
-                           assigns(:key)].join("|"))
+                           BRAINTREE[:key]].join("|"))
     assert_equal expected, assigns(:tr_hash)
   end
   

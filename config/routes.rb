@@ -9,8 +9,9 @@ ActionController::Routing::Routes.draw do |map|
                                    :clear  => :delete,
                                  }
 
-  map.resources :orders, :member => { :checkout => :get,
-                                     :status   => :get }
+  map.resources :orders, :member => { :checkout         => :get,
+                                      :gateway_response => :get,
+                                      :status           => :get }
   map.resources :users
   map.resource :session
 
