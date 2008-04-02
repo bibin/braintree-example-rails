@@ -1,7 +1,8 @@
-require 'digest/md5'
 require File.dirname(__FILE__) + '/../test_helper'
 
 class GatewayResponseTest < ActiveSupport::TestCase
+  include Braintree::Helpers
+
   def test_should_create_a_valid_hash
     response = GatewayResponse.new
   end
@@ -22,6 +23,7 @@ class GatewayResponseTest < ActiveSupport::TestCase
   end
 
   def successful_transaction_attributes
+    
   end
 
   def failed_transaction_attributes

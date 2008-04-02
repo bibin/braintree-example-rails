@@ -10,5 +10,16 @@ module Braintree
     def formatted_utc_time
       Time.now.getutc.strftime("%Y%m%d%H%M%S")
     end
+
+    def attributes_to_hash(string)
+      attributes = { }
+
+      string.split("&").each do |pair|
+        pair_array = pair.split("=")
+        attributes[pair_array[0].intern] = pair_array[1]
+      end
+
+      return attributes
+    end
   end
 end

@@ -21,6 +21,12 @@ class Braintree::HelpersTest < ActiveSupport::TestCase
     assert_not_nil actual
   end
   
+  def test_should_parse_string_into_hash_of_attributes
+    string = "foo=bar&bah=blam"
+    expected = { :foo => "bar", :bah => "blam" }
+    assert_equal expected, attributes_to_hash(string)
+  end
+  
   private
   def attrs
     {  :orderid => 1,
