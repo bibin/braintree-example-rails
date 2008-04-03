@@ -5,9 +5,11 @@ class OrdersController < ApplicationController
   before_filter :login_required
 
   def index
+    @orders = current_user.orders
   end
 
   def show
+    @order = Order.find params[:id]
   end
 
   # This method takes a +Cart+ and makes it into an +Order+ along with
@@ -18,6 +20,8 @@ class OrdersController < ApplicationController
     @cart = current_user.cart    
     unless current_user.cart.nil? || @cart.empty?
       @order = @cart.create_order
+      @order.user = current_user
+      @order.save
       redirect_to checkout_order_path(@order)
     else
       flash[:notice] = "There is nothing in your cart."
@@ -37,7 +41,9 @@ class OrdersController < ApplicationController
   def gateway_response
     @order = Order.find params[:id]
     @response = GatewayResponse.new(params)
+    @order.update_with_response(@response)
     if @response.is_successful?
+      current_user.cart.clear
       flash[:notice] = @response.message_for_success
       redirect_to order_path(@order)
     else
@@ -56,6 +62,6 @@ class OrdersController < ApplicationController
   end
 
   def create_hash_from_variables
-    @tr_hash = hash_value(@order.id, @order.amount, @time, BRAINTREE[:key])
+    @tr_hash = request_hash(@order.id, @order.amount, @time, BRAINTREE[:key])
   end
 end

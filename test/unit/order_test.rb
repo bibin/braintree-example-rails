@@ -20,4 +20,8 @@ class OrderTest < ActiveSupport::TestCase
     order.save
     assert_equal expected, order.amount
   end
+
+  def test_should_update_with_response
+    
+  end
 end

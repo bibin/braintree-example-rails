@@ -8,11 +8,22 @@ class Braintree::HelpersTest < ActiveSupport::TestCase
     assert Braintree::Helpers.is_a?(Module)
   end
 
-  def test_should_generate_hash
+  def test_should_generate_request_hash
     to_hash = [ attrs[:orderid], attrs[:amount], 
                 attrs[:time],    attrs[:key]   ].join("|")
     expected = Digest::MD5.hexdigest(to_hash)
-    assert_equal expected, hash_value(attrs[:orderid], attrs[:amount], attrs[:time], attrs[:key])
+    assert_equal expected, request_hash(attrs[:orderid], attrs[:amount], attrs[:time], attrs[:key])
+  end
+
+  def test_should_generate_response_hash
+    to_hash = [ attrs[:orderid], attrs[:amount], 
+                attrs[:response], attrs[:transactionid],
+                attrs[:avsresponse], attrs[:cvvresponse],
+                attrs[:time],    attrs[:key]   ].join("|")
+    expected = Digest::MD5.hexdigest(to_hash)
+    assert_equal expected, response_hash(attrs[:orderid], attrs[:amount], 
+       attrs[:response], attrs[:transactionid], attrs[:avsresponse], 
+       attrs[:cvvresponse], attrs[:time], attrs[:key])
   end
 
   def test_should_generate_proper_time
@@ -26,13 +37,16 @@ class Braintree::HelpersTest < ActiveSupport::TestCase
     expected = { :foo => "bar", :bah => "blam" }
     assert_equal expected, attributes_to_hash(string)
   end
-  
+
   private
   def attrs
     {  :orderid => 1,
        :amount  => 1.00,
        :time    => "20080324123456",
-       :key     => "123456"
+       :key     => "123456",
+       :response => "3",
+       :avsresponse => "N",
+       :cvvresponse => "N"
     }
   end
 end

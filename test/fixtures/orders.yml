@@ -2,32 +2,32 @@
 
 first:
   user_id: 1
-  order_id: MyString
+  orderid: MyString
   response: MyString
-  response_text: MyString
+  responsetext: MyString
   authcode: MyString
   amount:
-  transaction_id:
-  gateway_hash: MyString
-  avs_response: MyString
-  cvv_response: 
+  transactionid:
+  response_hash: MyString
+  avsresponse: MyString
+  cvvresponse: 
   response_code: MyString
-  gateway_response: MyString
+  full_response: MyString
   customer_ip: MyString
   status: MyString
 
 two:
   user_id: 1
-  order_id: MyString
+  orderid: MyString
   response: MyString
-  response_text: MyString
+  responsetext: MyString
   authcode: MyString
-  amount: 
-  transaction_id:
-  gateway_hash: MyString
-  avs_response: MyString
-  cvv_response: 
+  amount:
+  transactionid:
+  response_hash: MyString
+  avsresponse: MyString
+  cvvresponse: 
   response_code: MyString
-  gateway_response: MyString
+  full_response: MyString
   customer_ip: MyString
   status: MyString

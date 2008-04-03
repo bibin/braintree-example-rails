@@ -89,6 +89,24 @@ class OrdersControllerTest < ActionController::TestCase
                            BRAINTREE[:key]].join("|"))
     assert_equal expected, assigns(:tr_hash)
   end
+
+  # GATEWAY_RESPONSE
+  def test_should_assign_variable_for_order
+    # FIXME: I need params on theses here.
+    login_as :quentin
+    get :gateway_response, :id => users(:quentin).orders.first.id
+    assert assigns(:order)
+  end
+
+  def test_should_assign_variable_for_response
+    login_as :quentin
+    get :gateway_response, :id => users(:quentin).orders.first.id
+    assert assigns(:response)
+  end
+
+  def test_should_update_order_with_response
+    
+  end
   
   # STATUS
   

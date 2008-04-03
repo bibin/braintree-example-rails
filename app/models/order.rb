@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :order_items, :dependent => :destroy
 
   # VALIDATIONS
-  validates_uniqueness_of :transaction_id, :allow_nil => true
+  validates_uniqueness_of :transactionid, :allow_nil => true
 
   # CALLBACKS
   before_save :calculate_amount
@@ -13,6 +13,12 @@ class Order < ActiveRecord::Base
     self.amount = 0
     self.order_items.each do |order_item|
       self.amount += order_item.total_cost
+    end
+  end
+
+  def update_with_response(response)
+    if response.is_a?(GatewayResponse)
+      self.update_attributes(response.to_order_attributes)
     end
   end
 

@@ -1,8 +1,14 @@
 require 'digest/md5'
 module Braintree
   module Helpers
-    def hash_value(orderid, amount, time, key)
+    def request_hash(orderid, amount, time, key)
       string_to_hash = [orderid, amount, time, key].join("|")
+      tr_hash = Digest::MD5.hexdigest(string_to_hash)
+      return tr_hash
+    end
+
+    def response_hash(orderid, amount, response, transactionid, avsresponse, cvvresponse, time, key)
+      string_to_hash = [orderid, amount, response, transactionid, avsresponse, cvvresponse, time, key].join("|")
       tr_hash = Digest::MD5.hexdigest(string_to_hash)
       return tr_hash
     end

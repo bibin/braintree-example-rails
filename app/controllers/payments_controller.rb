@@ -8,7 +8,8 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    @amount = 50.00
+    @amount = 0.50
+    @type = "sale"
     @orderid = "123456"
 
        @now = Time.now
