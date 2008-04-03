@@ -1,4 +1,4 @@
-class GatewayResponse
+class Braintree::GatewayResponse
   include Braintree::Helpers
 
   attr_accessor :response, :responsetext, :response_code, :full_response, 

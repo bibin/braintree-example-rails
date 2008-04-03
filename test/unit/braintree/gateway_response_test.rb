@@ -1,45 +1,45 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.dirname(__FILE__) + '/../../test_helper'
 
-class GatewayResponseTest < ActiveSupport::TestCase
+class Braintree::GatewayResponseTest < ActiveSupport::TestCase
   include Braintree::Helpers
 
   def test_should_create_a_valid_hash
-    response = GatewayResponse.new(attributes_to_hash(successful_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction))
     assert response.is_valid?
   end
 
   def test_should_be_successful_if_response_is_success
-    response = GatewayResponse.new(attributes_to_hash(successful_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction))
     assert response.is_successful?
   end
 
   def test_should_be_declined_if_response_is_declined
-    response = GatewayResponse.new(attributes_to_hash(declined_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(declined_transaction))
     assert response.is_declined?
   end
 
   def test_should_be_error_if_response_is_error
-    response = GatewayResponse.new(attributes_to_hash(duplicate_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(duplicate_transaction))
     assert response.is_error?
   end
 
   def test_should_populate_returned_hash
-    response = GatewayResponse.new(attributes_to_hash(successful_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction))
     assert_equal response.hash, response.returned_hash
   end
 
   def test_should_be_approved_if_response_matches
-    response = GatewayResponse.new(attributes_to_hash(successful_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction))
     assert_equal "approved", response.response_status
   end
 
   def test_should_be_declined_if_response_matches
-    response = GatewayResponse.new(attributes_to_hash(declined_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(declined_transaction))
     assert_equal "declined", response.response_status
   end
 
   def test_should_be_error_if_response_matches
-    response = GatewayResponse.new(attributes_to_hash(duplicate_transaction))
+    response = Braintree::GatewayResponse.new(attributes_to_hash(duplicate_transaction))
     assert_equal "error", response.response_status
   end
 

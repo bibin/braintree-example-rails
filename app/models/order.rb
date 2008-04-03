@@ -17,7 +17,7 @@ class Order < ActiveRecord::Base
   end
 
   def update_with_response(response)
-    if response.is_a?(GatewayResponse)
+    if response.is_a?(Braintree::GatewayResponse)
       self.update_attributes(response.to_order_attributes)
     end
   end

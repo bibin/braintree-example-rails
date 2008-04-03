@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
 
   def gateway_response
     @order = Order.find params[:id]
-    @response = GatewayResponse.new(params)
+    @response = Braintree::GatewayResponse.new(params)
     @order.update_with_response(@response)
     if @response.is_successful?
       current_user.cart.clear
