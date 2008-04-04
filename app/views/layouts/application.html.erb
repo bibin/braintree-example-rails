@@ -18,6 +18,9 @@
           <% else -%>
             Welcome, <%= current_user.login %> |
             <%= link_to "Your Cart (#{cart_item_count})", cart_path %> |
+            <% if current_user.orders.any? -%>
+              <%= link_to "Your Orders", orders_path %> | 
+            <% end -%>
             <%= link_to "logout", logout_path %>
           <% end -%>
         </div>

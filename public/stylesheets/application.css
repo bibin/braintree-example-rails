@@ -115,16 +115,21 @@ legend {
     margin: 0 auto;
 }
 
+.cart_table, .order_table {
+    width: 75%;
+    text-align: center
+}
+
 .cart_table {
     text-align: center;
     margin: 0 auto;
-    width: 75%;
     font-size: x-large;
 }
 
-.cart_table td { border-bottom: 1px solid #D8DFE7; }
+.order_table {
+    font-size: medium;
+}
 
-.cart_table td.total { font-weight: bold }
+.cart_table td, .order_table td { border-bottom: 1px solid #D8DFE7; }
 
-
-
+.cart_table td.total, .order_table td.total { font-weight: bold }

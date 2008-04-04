@@ -82,9 +82,8 @@ class OrdersControllerTest < ActionController::TestCase
   def test_should_have_hidden_braintree_hash_amounts_on_checkout_form
     login_as :quentin
     get :checkout, :id => users(:quentin).orders.first.id
-    assert_tag :tag => "div", :children => { :count => 7, :only => { :tag => "input" } }
-  end
-  
+    assert_tag :tag => "div", :children => { :count => 8, :only => { :tag => "input" } }
+  end  
 
   # GATEWAY_RESPONSE
   def test_should_assign_variable_for_order

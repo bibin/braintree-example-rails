@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   # this hash is generated to submit the form.
   def checkout
     @order = Order.find params[:id]
-    @gateway_request = Braintree::GatewayRequest.new(@order.to_gateway_request.merge(:response_url => gateway_response_order_path(@order)))
+    @gateway_request = Braintree::GatewayRequest.new(@order.to_gateway_request.merge(:response_url => gateway_response_order_url(@order)))
   end
 
   # This is the action that the user gets redirected back to after processing

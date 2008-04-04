@@ -28,7 +28,8 @@ class OrderTest < ActiveSupport::TestCase
   def test_should_generate_a_hash_of_attributes_for_gateway_request
     order = orders(:first)
     expected = { :orderid => order.id, :amount => order.amount, 
-                 :type => order.gateway_request_type }
+                 :type => order.gateway_request_type,
+                 :customer_vault => order.customer_vault_type }
     assert_equal expected, order.to_gateway_request
   end
   

@@ -1,2 +1,28 @@
+<p><%= link_to "Orders", orders_path %></p>
 <h1>Orders #<%= @order.id %></h1>
 
+<p>This order was placed on <%= h @order.created_at %>.</p>
+
+<p><b>Credit Card Transaction: </b><%= @order.status %>
+
+<h2 id="<%= dom_id @order.order_items %>">Items in this order:</h2>
+<table cellspacing="0" class="order_table medium">
+  <tr class="header">
+    <th scope="col" class="left">Product</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Price</th>
+    <th scope="col">Total Cost</th>
+  </tr>
+  <% @order.order_items.each do |order_item| -%>
+    <tr>
+      <td class="left"><%= h order_item.product.name %></td>
+      <td><%= h order_item.quantity %></td>
+      <td><%= number_to_currency order_item.price %></td>
+      <td><%= number_to_currency order_item.total_cost %></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <td class="right total" colspan="3">Total:</td>
+    <td><%= number_to_currency @order.amount %></td>
+  </tr>
+</table>

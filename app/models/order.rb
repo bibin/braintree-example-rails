@@ -27,13 +27,18 @@ class Order < ActiveRecord::Base
   # Call @order.to_gateway_request to generate valid instance variables to use in the 
   # checkout order form.
   def to_gateway_request
-    { :orderid => self.id, :amount => self.amount, :type => self.gateway_request_type }
+    { :orderid => self.id, :amount => self.amount, :type => self.gateway_request_type,
+      :customer_vault => self.customer_vault_type }
   end
 
   # This will eventually be hooked up to acts_as_state machine to determine
   # what the exact value is.  For now, all orders are 'sale'.
   def gateway_request_type
     "sale" if self.status.blank?
+  end
+
+  def customer_vault_type
+    "add_customer" if self.user.customer_vault_id.blank?
   end
 
 end
