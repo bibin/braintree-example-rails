@@ -1,6 +1,5 @@
 require 'digest/md5'
 class OrdersController < ApplicationController
-  include Braintree::Helpers
   
   before_filter :login_required
 
@@ -34,10 +33,13 @@ class OrdersController < ApplicationController
   # this hash is generated to submit the form.
   def checkout
     @order = Order.find params[:id]
-    prepare_hash_variables
-    create_hash_from_variables
+    @gateway_request = Braintree::GatewayRequest.new(@order.to_gateway_request.merge(:response_url => gateway_response_order_path(@order)))
   end
 
+  # This is the action that the user gets redirected back to after processing
+  # via the gateway.  First, the +Order+ is found, and then a new +GatewayResponse+
+  # object is created.  Depending upon success or failure, a success page or a 
+  # form for resubmission is shown to the user.
   def gateway_response
     @order = Order.find params[:id]
     @response = Braintree::GatewayResponse.new(params)
@@ -56,12 +58,4 @@ class OrdersController < ApplicationController
     @order = Order.find params[:id]
   end
 
-  private
-  def prepare_hash_variables
-    @time = formatted_utc_time
-  end
-
-  def create_hash_from_variables
-    @tr_hash = request_hash(@order.id, @order.amount, @time, BRAINTREE[:key])
-  end
 end

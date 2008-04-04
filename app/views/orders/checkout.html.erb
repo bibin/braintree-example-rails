@@ -1,7 +1,8 @@
 <h1>Checkout</h1>
 <p>Submit your credit card information securely.</p>
 
-<% form_tag 'https://secure.braintreepaymentgateway.com/api/transact.php' do -%>
+<% form_tag BRAINTREE[:transact_api_url] do -%>
+  <%= gateway_request_hidden_fields(@gateway_request) %>
   <%= transparent_redirect_hidden_fields %>
   <%= secure_vault_hidden_fields %>
   <table cellspacing="0">

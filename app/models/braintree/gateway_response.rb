@@ -1,5 +1,5 @@
+require 'digest/md5'
 class Braintree::GatewayResponse
-  include Braintree::Helpers
 
   attr_accessor :response, :responsetext, :response_code, :full_response, 
                 :cvvresponse, :avsresponse, :returned_hash, :time, :orderid, 
@@ -64,14 +64,33 @@ class Braintree::GatewayResponse
     end
   end
 
-  # Determines whether the response hash is valid using Braintree::Helper 
-  # method.
+  # The hash sent with the Gateway Response should equal a hash that can get
+  # generated using the key and the sent parameters.
   def is_valid?
-    self.hash = response_hash( self.orderid, self.amount, self.response,
-                               self.transactionid, self.avsresponse,
-                               self.cvvresponse, self.time, BRAINTREE[:key] )
+    return true if self.hash == self.generated_hash
   end
 
+  # Takes the values of the Gateway Response and generates a hash from them using
+  # MD5 and format listed in the documentation.
+  def generated_hash
+    Digest::MD5.hexdigest([self.orderid, self.amount, self.response,
+                           self.transactionid, self.avsresponse,
+                           self.cvvresponse, self.time, BRAINTREE[:key]].join("|"))
+  end
+
+  # Takes a query string parameter and breaks it down in key/value hash pairs
+  # FIXME: should break down string on initialize
+  def attributes_to_hash(string)
+    attributes = { }
+    
+    string.split("&").each do |pair|
+      pair_array = pair.split("=")
+      attributes[pair_array[0].intern] = pair_array[1]
+    end
+    
+    return attributes
+  end
+  
   # AVS_RESPONSE_CODES
   def avs_matches?
     self.avsresponse.include?("Y")

@@ -67,28 +67,24 @@ class OrdersControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
 
-  def test_should_set_time_for_transparent_redirect_on_checkout
+  def test_should_assign_variable_for_gateway_request
     login_as :quentin
     get :checkout, :id => users(:quentin).orders.first.id
-    assert assigns(:time)
+    assert assigns(:gateway_request)
   end
 
-  def test_should_set_hash_for_transparent_redirect_on_checkout
+  def test_should_have_proper_action_on_checkout_form
     login_as :quentin
     get :checkout, :id => users(:quentin).orders.first.id
-    assert assigns(:tr_hash)
+    assert_tag :tag => "form", :attributes => { :action => BRAINTREE[:transact_api_url] }
   end
 
-  def test_should_hash_values_correctly_on_checkout
+  def test_should_have_hidden_braintree_hash_amounts_on_checkout_form
     login_as :quentin
     get :checkout, :id => users(:quentin).orders.first.id
-    expected = Digest::MD5.hexdigest(
-                          [assigns(:order).id, 
-                           assigns(:order).amount, 
-                           assigns(:time), 
-                           BRAINTREE[:key]].join("|"))
-    assert_equal expected, assigns(:tr_hash)
+    assert_tag :tag => "div", :children => { :count => 7, :only => { :tag => "input" } }
   end
+  
 
   # GATEWAY_RESPONSE
   def test_should_assign_variable_for_order

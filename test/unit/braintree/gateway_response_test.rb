@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 class Braintree::GatewayResponseTest < ActiveSupport::TestCase
-  include Braintree::Helpers
 
   def test_should_create_a_valid_hash
     response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction))
@@ -68,5 +67,19 @@ class Braintree::GatewayResponseTest < ActiveSupport::TestCase
 
   def duplicate_transaction
     "response=3&responsetext=Duplicate%20Customer%20Vault%20Id&authcode=&transactionid=0&avsresponse=&cvvresponse=&orderid=1&type=&response_code=300&customer_vault_id=236846573&username=557218&time=20080401110844&amount=1.0&hash=d5ca5430aad0cc4b53f89da2f57c373f"
+  end
+
+  def fuxored_hash_transaction
+  end
+
+  def attributes_to_hash(string)
+    attributes = { }
+    
+    string.split("&").each do |pair|
+      pair_array = pair.split("=")
+      attributes[pair_array[0].intern] = pair_array[1]
+    end
+    
+    return attributes
   end
 end

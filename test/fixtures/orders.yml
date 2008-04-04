@@ -14,7 +14,7 @@ first:
   response_code: MyString
   full_response: MyString
   customer_ip: MyString
-  status: MyString
+  status: 
 
 two:
   user_id: 1
@@ -30,4 +30,5 @@ two:
   response_code: MyString
   full_response: MyString
   customer_ip: MyString
-  status: MyString
+  status:
+    

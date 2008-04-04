@@ -16,10 +16,24 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Takes a response hash from a +Braintree::GatewayResponse+ object and
+  # updates the necessary attributes.
   def update_with_response(response)
     if response.is_a?(Braintree::GatewayResponse)
       self.update_attributes(response.to_order_attributes)
     end
+  end
+  
+  # Call @order.to_gateway_request to generate valid instance variables to use in the 
+  # checkout order form.
+  def to_gateway_request
+    { :orderid => self.id, :amount => self.amount, :type => self.gateway_request_type }
+  end
+
+  # This will eventually be hooked up to acts_as_state machine to determine
+  # what the exact value is.  For now, all orders are 'sale'.
+  def gateway_request_type
+    "sale" if self.status.blank?
   end
 
 end
