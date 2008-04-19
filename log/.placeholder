@@ -1,0 +1,3 @@
+cannot check in an empty directory to .git
+creating this file to check in log directory so rails doesn't complain when it doesn't exist
+

@@ -1,4 +1,4 @@
-log/*
+log/*.log
 db/schema.rb
 tmp/*
 *~

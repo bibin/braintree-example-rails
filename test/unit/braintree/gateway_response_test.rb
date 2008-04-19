@@ -58,7 +58,7 @@ class Braintree::GatewayResponseTest < ActiveSupport::TestCase
   end
 
   def successful_transaction
-    "response=1&responsetext=Customer%20Added&authcode=&transactionid=0&avsresponse=&cvvresponse=&orderid=123456&type=&response_code=100&customer_vault_id=1154835797&username=557218&time=20080402213642&amount=50.0&hash=75b4c62134e0bf50bccb3e668f6df291"
+    "response=1&responsetext=Customer%20Added&authcode=&transactionid=0&avsresponse=&cvvresponse=&orderid=123456&type=&response_code=100&customer_vault_id=1154835797&username=557218&time=20080402213642&amount=50.0&hash=e9543e6c931cb2109166edcb198c26d6"
   end
 
   def declined_transaction
