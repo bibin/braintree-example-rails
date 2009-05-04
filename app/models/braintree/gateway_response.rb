@@ -7,11 +7,7 @@ class Braintree::GatewayResponse
                 :customer_vault_id, :type, :hash, :response_status
 
   def initialize(attributes = nil)
-    # FIXME: there is a much easier way to do this.
-    attributes.delete_if { |param, value| param == "action" }
-    attributes.delete_if { |param, value| param == "id" }
-    attributes.delete_if { |param, value| param == "controller" }
-    attributes.each { |k,v| self.send("#{k}=", v) } if attributes.any?
+    attributes.except(:action, :id, :controller).each { |k,v| self.send("#{k}=", v) }
   end
 
   def to_order_attributes
@@ -67,15 +63,21 @@ class Braintree::GatewayResponse
   # The hash sent with the Gateway Response should equal a hash that can get
   # generated using the key and the sent parameters.
   def is_valid?
-    return true if self.hash == self.generated_hash
+    self.hash == self.generated_hash
   end
 
   # Takes the values of the Gateway Response and generates a hash from them using
   # MD5 and format listed in the documentation.
   def generated_hash
-    Digest::MD5.hexdigest([self.orderid, self.amount, self.response,
-                           self.transactionid, self.avsresponse,
-                           self.cvvresponse, self.time, BRAINTREE[:key]].join("|"))
+    if customer_vault_id.nil?
+      Digest::MD5.hexdigest([self.orderid, self.amount, self.response,
+                             self.transactionid, self.avsresponse,
+                             self.cvvresponse, self.time, BRAINTREE[:key]].join("|"))
+    else
+      Digest::MD5.hexdigest([self.orderid, self.amount, self.response,
+                             self.transactionid, self.avsresponse,
+                             self.cvvresponse, self.customer_vault_id, self.time, BRAINTREE[:key]].join("|"))
+    end
   end
 
   # Takes a query string parameter and breaks it down in key/value hash pairs

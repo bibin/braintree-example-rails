@@ -2,7 +2,12 @@ require File.dirname(__FILE__) + '/../../test_helper'
 
 class Braintree::GatewayResponseTest < ActiveSupport::TestCase
 
-  def test_should_create_a_valid_hash
+  def test_should_create_a_valid_hash_without_a_vault_id
+    response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction_without_vault_id))
+    assert response.is_valid?
+  end
+  
+  def test_should_create_a_valid_hash_with_a_vault_id
     response = Braintree::GatewayResponse.new(attributes_to_hash(successful_transaction))
     assert response.is_valid?
   end
@@ -58,7 +63,11 @@ class Braintree::GatewayResponseTest < ActiveSupport::TestCase
   end
 
   def successful_transaction
-    "response=1&responsetext=Customer%20Added&authcode=&transactionid=0&avsresponse=&cvvresponse=&orderid=123456&type=&response_code=100&customer_vault_id=1154835797&username=557218&time=20080402213642&amount=50.0&hash=e9543e6c931cb2109166edcb198c26d6"
+    "response=1&responsetext=Customer%20Added&authcode=&transactionid=0&avsresponse=&cvvresponse=&orderid=123456&type=&response_code=100&customer_vault_id=1154835797&username=557218&time=20080402213642&amount=50.0&hash=63a05738661d22aeda9524aee1eb144d"
+  end
+  
+  def successful_transaction_without_vault_id
+    "response=1&responsetext=Customer%20Added&authcode=&transactionid=0&avsresponse=&cvvresponse=&orderid=123456&type=&response_code=100&customer_vault_id=&username=557218&time=20080402213642&amount=50.0&hash=e9543e6c931cb2109166edcb198c26d6"
   end
 
   def declined_transaction

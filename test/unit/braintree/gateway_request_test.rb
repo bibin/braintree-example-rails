@@ -34,9 +34,16 @@ class Braintree::GatewayRequestTest < ActiveSupport::TestCase
     assert_not_nil request.hash
   end
 
-  def test_should_generate_proper_hash
+  def test_should_generate_proper_hash_without_customer_vault_id
     request = Braintree::GatewayRequest.new(standard_attributes)
     expected = Digest::MD5.hexdigest([request.orderid, request.amount,
+                                      request.time, request.key].join("|"))
+    assert_equal expected, request.hash
+  end
+  
+  def test_should_generate_proper_hash_with_customer_vault_id
+    request = Braintree::GatewayRequest.new(standard_attributes(:customer_vault_id => 123))
+    expected = Digest::MD5.hexdigest([request.orderid, request.amount, request.customer_vault_id,
                                       request.time, request.key].join("|"))
     assert_equal expected, request.hash
   end
